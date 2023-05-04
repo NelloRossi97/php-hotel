@@ -49,7 +49,7 @@
         $voteValue = $_GET['voteFilter'];
         $filteredHotels = [];
         foreach($hotels as $hotel){
-            if($hotel['parking'] == $parkValue && $hotel['vote'] == $voteValue){    
+            if($hotel['parking'] == $parkValue && $hotel['vote'] == $parkValue){    
                 $filteredHotels[] = $hotel;
             }
         }
@@ -114,7 +114,7 @@ Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gl
                             <img src="<?php echo $hotel['image'] ?>" alt="<?php echo $hotel['name'] ?>" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $hotel['name'] ?></h5>
-                                <p> <?php echo $hotel['description'] ?> </p>
+                                <p>Descrizione <?php echo $hotel['description'] ?></p>
                                 <p class="fw-bold">Valutazione: <?php echo $hotel['vote'] ?> </p>
                                 <p class="card-text">Parcheggio: 
                                     <?php if($hotel['parking'] === true){
@@ -124,7 +124,7 @@ Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gl
                                     }
                                         ?> 
                                 </p>
-                                <p>Distanza dal centro: <?php echo $hotel['distance_to_center'] ?> metri</p>
+                                <p>Distanza dal centro: <?php echo $hotel['distance_to_center'] ?></p>
                             </div>
                             
                         </div>
