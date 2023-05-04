@@ -44,7 +44,7 @@
 
     ];
 
-    if ($parkValue = ($_GET['parkFilter']) != ''){
+    if ($parkValue = isset($_GET['parkFilter']) && $_GET['parkFilter'] != ''){
         $parkValue = $_GET['parkFilter'];
         $filteredHotels = [];
         foreach($hotels as $hotel){
