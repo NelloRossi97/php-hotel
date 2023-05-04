@@ -44,18 +44,13 @@
 
     ];
 
-    if (!empty($_GET['parkFilter'])){
+    if ($parkValue = ($_GET['parkFilter']) != ''){
         $parkValue = $_GET['parkFilter'];
-        // $voteValue = $_GET['voteFilter'];
         $filteredHotels = [];
         foreach($hotels as $hotel){
-            if($hotel['parking'] == $parkValue){
+            if($hotel['parking'] == $parkValue){    
                 $filteredHotels[] = $hotel;
             }
-
-            // if($hotel['parking'] == $parkValue && $hotel['vote'] == $voteValue ){
-            //     $filteredHotels[] = $hotel;
-            // }
         }
     } else {
         $filteredHotels = $hotels;
@@ -91,8 +86,8 @@ Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gl
                 <label for="parkFilter">Filtra per parcheggio:</label>
                 <select name="parkFilter" id="parkFilter" class="me-4">
                     <option value="">Scegli..</option>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
+                    <option value="1">true</option>
+                    <option value="0">false</option>
                 </select>
                
 
