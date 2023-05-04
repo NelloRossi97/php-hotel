@@ -46,9 +46,10 @@
 
     if ($parkValue = isset($_GET['parkFilter']) && $_GET['parkFilter'] != ''){
         $parkValue = $_GET['parkFilter'];
+        $voteValue = $_GET['voteFilter'];
         $filteredHotels = [];
         foreach($hotels as $hotel){
-            if($hotel['parking'] == $parkValue){    
+            if($hotel['parking'] == $parkValue && $hotel['vote'] == $voteValue){    
                 $filteredHotels[] = $hotel;
             }
         }
