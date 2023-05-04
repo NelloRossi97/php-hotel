@@ -44,6 +44,22 @@
 
     ];
 
+    if (!empty($_GET['parkFilter'])){
+        $parkValue = $_GET['parkFilter'];
+        // $voteValue = $_GET['voteFilter'];
+        $filteredHotels = [];
+        foreach($hotels as $hotel){
+            if($hotel['parking'] == $parkValue){
+                $filteredHotels[] = $hotel;
+            }
+
+            // if($hotel['parking'] == $parkValue && $hotel['vote'] == $voteValue ){
+            //     $filteredHotels[] = $hotel;
+            // }
+        }
+    } else {
+        $filteredHotels = $hotels;
+    }
 /* 
 
 Bonus:
@@ -71,28 +87,32 @@ Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gl
             <div>
                 <h1>Booking.com</h1>
             </div>
-            <form action="filter">
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
                 <label for="parkFilter">Filtra per parcheggio:</label>
                 <select name="parkFilter" id="parkFilter" class="me-4">
-                    <option value="true">con parcheggio</option>
-                    <option value="false">senza parcheggio</option>
+                    <option value="">Scegli..</option>
+                    <option value="true">true</option>
+                    <option value="false">false</option>
                 </select>
+               
 
                 <label for="voteFilter">Filtra per voto:</label>
                 <select name="voteFilter" id="voteFilter">
+                    <option value="">Scegli..</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
+                <button type="submit">Invia</button>
             </form>
         </nav>
     </header>
     <main>
         <div class="container">
             <div class="row">
-                <?php foreach ($hotels as $hotel) {?>
+                <?php foreach ($filteredHotels as $hotel) {?>
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                         <div class="card p-3">
                             <img src="<?php echo $hotel['image'] ?>" alt="<?php echo $hotel['name'] ?>" class="card-img-top">
