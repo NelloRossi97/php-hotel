@@ -44,17 +44,40 @@
 
     ];
 
-    if ($parkValue = isset($_GET['parkFilter']) && $_GET['parkFilter'] != ''){
-        $parkValue = $_GET['parkFilter'];
-        $voteValue = $_GET['voteFilter'];
-        $filteredHotels = [];
-        foreach($hotels as $hotel){
-            if($hotel['parking'] == $parkValue && $hotel['vote'] == $parkValue){    
-                $filteredHotels[] = $hotel;
+    // if ($parkValue = isset($_GET['parkFilter']) && $_GET['parkFilter'] != ''){
+    //     $parkValue = $_GET['parkFilter'];
+    //     $voteValue = $_GET['voteFilter'];
+    //     $filteredHotels = [];
+    //     foreach($hotels as $hotel){
+    //         if($hotel['parking'] == $parkValue && $hotel['vote'] == $parkValue){    
+    //             $filteredHotels[] = $hotel;
+    //         }
+    //     }
+    // } else {
+    //     $filteredHotels = $hotels;
+    // }
+    $filteredHotels = $hotels;
+    $tempHotels = [];  
+    if (!empty($_GET['parkFilter'])){
+        $tempHotels = [];
+        $parkValue = ($_GET['parkFilter'] == 'si') ? true : false;
+        foreach($filteredHotels as $hotel){
+            if($hotel['parking'] === $parkValue){
+                $tempHotels[] = $hotel;
             }
         }
-    } else {
-        $filteredHotels = $hotels;
+        $filteredHotels = $tempHotels;
+    }
+
+    if (!empty($_GET['voteFilter'])){
+        $tempHotels = [];
+        $voteValue = $_GET['voteFilter'];
+        foreach($filteredHotels as $hotel){
+            if($hotel['vote'] >= $voteValue){
+                $tempHotels[] = $hotel;
+            }
+        }
+        $filteredHotels = $tempHotels;
     }
 /* 
 
@@ -86,15 +109,15 @@ Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gl
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
                 <label for="parkFilter">Filtra per parcheggio:</label>
                 <select name="parkFilter" id="parkFilter" class="me-4">
-                    <option value="">Scegli..</option>
-                    <option value="1">true</option>
-                    <option value="0">false</option>
+                    <option value="">Tutti</option>
+                    <option value="si">Parking</option>
+                    <option value="no">No parking</option>
                 </select>
                
 
                 <label for="voteFilter">Filtra per voto:</label>
                 <select name="voteFilter" id="voteFilter">
-                    <option value="">Scegli..</option>
+                    <option value="">Tutti</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
